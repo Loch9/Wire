@@ -1,0 +1,3 @@
+[submodule "Wire/vendor/spdlog"]
+	path = Wire/vendor/spdlog
+	url = https://github.com/gabime/spdlog

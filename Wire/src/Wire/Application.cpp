@@ -4,12 +4,20 @@ namespace Wire {
 
 	Application::Application()
 	{
+<<<<<<< HEAD
 
 	}
 
 	Application::~Application()
 	{
 		
+=======
+	}
+
+
+	Application::~Application()
+	{
+>>>>>>> temp
 	}
 
 	void Application::Run()

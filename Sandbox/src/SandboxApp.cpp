@@ -12,6 +12,10 @@ public:
 	{
 
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp
 };
 
 Wire::Application* Wire::CreateApplication()

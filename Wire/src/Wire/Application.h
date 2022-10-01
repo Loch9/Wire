@@ -13,8 +13,15 @@ namespace Wire {
 		void Run();
 	};
 
+<<<<<<< HEAD
 	Application* CreateApplication();
 
 }
 
 
+=======
+	// To be defined in CLIENT
+	Application* CreateApplication();
+
+}
+>>>>>>> temp
