@@ -13,8 +13,7 @@ namespace Wire {
 		void Run();
 	};
 
+
 	Application* CreateApplication();
 
 }
-
-

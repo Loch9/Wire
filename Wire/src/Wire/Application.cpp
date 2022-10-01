@@ -4,12 +4,10 @@ namespace Wire {
 
 	Application::Application()
 	{
-
 	}
 
 	Application::~Application()
 	{
-		
 	}
 
 	void Application::Run()
