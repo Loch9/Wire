@@ -6,7 +6,6 @@ namespace Wire {
 	{
 	}
 
-
 	Application::~Application()
 	{
 	}

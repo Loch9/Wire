@@ -12,7 +12,7 @@ public:
 	{
 
 	}
-
+  
 };
 
 Wire::Application* Wire::CreateApplication()
