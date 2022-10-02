@@ -14,10 +14,8 @@ namespace Wire {
 =======
 	}
 
-
 	Application::~Application()
 	{
->>>>>>> temp
 	}
 
 	void Application::Run()

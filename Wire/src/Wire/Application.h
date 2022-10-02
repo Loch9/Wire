@@ -24,4 +24,3 @@ namespace Wire {
 	Application* CreateApplication();
 
 }
->>>>>>> temp
