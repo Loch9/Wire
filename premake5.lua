@@ -26,7 +26,8 @@ project "Wire"
 
     includedirs
     {
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "Wire/src"
     }
 
     filter "system:windows"

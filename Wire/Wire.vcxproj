@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WR_PLATFORM_WINDOWS;WR_BUILD_DLL;WR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -101,7 +101,7 @@ IF EXIST ..\bin\Debug-windows-x86_64\Wire\Wire.dll\ (xcopy /Q /E /Y /I ..\bin\De
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WR_PLATFORM_WINDOWS;WR_BUILD_DLL;WR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -127,7 +127,7 @@ IF EXIST ..\bin\Release-windows-x86_64\Wire\Wire.dll\ (xcopy /Q /E /Y /I ..\bin\
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WR_PLATFORM_WINDOWS;WR_BUILD_DLL;WR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -153,6 +153,10 @@ IF EXIST ..\bin\Dist-windows-x86_64\Wire\Wire.dll\ (xcopy /Q /E /Y /I ..\bin\Dis
     <ClInclude Include="src\Wire\Application.h" />
     <ClInclude Include="src\Wire\Core.h" />
     <ClInclude Include="src\Wire\EntryPoint.h" />
+    <ClInclude Include="src\Wire\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\Wire\Events\Event.h" />
+    <ClInclude Include="src\Wire\Events\KeyEvent.h" />
+    <ClInclude Include="src\Wire\Events\MouseEvent.h" />
     <ClInclude Include="src\Wire\Log.h" />
   </ItemGroup>
   <ItemGroup>

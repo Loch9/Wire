@@ -2,6 +2,10 @@
 .vs/
 bin/
 bin-int/
+!vendor/premake5/bin
 
 # Files
 *.user
+*.sln
+*.vcxproj
+*.filters

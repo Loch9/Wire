@@ -1,0 +1,3 @@
+stty -echoctl
+vendor/premake5/bin/Mac/premake5 xcode4
+stty echoctl
