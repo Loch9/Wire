@@ -4,14 +4,6 @@ namespace Wire {
 
 	Application::Application()
 	{
-<<<<<<< HEAD
-
-	}
-
-	Application::~Application()
-	{
-		
-=======
 	}
 
 	Application::~Application()

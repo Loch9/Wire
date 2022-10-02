@@ -42,6 +42,7 @@ project "Wire"
 
         postbuildcommands
         {
+            ("if not exist ..\\bin\\" .. outputdir .. "\\Sandbox mkdir ..\\bin\\" .. outputdir .. "\\Sandbox\\"),
             ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
         }
 
