@@ -1,3 +1,0 @@
-stty -echoctl
-vendor/premake5/bin/Linux/premake5 gmake2
-stty echoctl

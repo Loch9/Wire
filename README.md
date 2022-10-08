@@ -1,2 +1,2 @@
 # Wire
-Wire: Modular Synth Designer
+Wire Designer

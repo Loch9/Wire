@@ -3,8 +3,8 @@
 #include "Wire/Application.h"
 #include "Wire/Log.h"
 
-// -----------Entry Point-----------
+// ---Entry Point---------------------
 
 #include "Wire/EntryPoint.h"
 
-// ---------------------------------
+// -----------------------------------

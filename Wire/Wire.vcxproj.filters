@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Wire">
       <UniqueIdentifier>{3C928E7C-28C9-8F0D-D1B5-7510BDCB0B0F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Wire\Event">
-      <UniqueIdentifier>{8DD01F63-7988-61B0-E28F-3A0CCE66FCA0}</UniqueIdentifier>
+    <Filter Include="Wire\Events">
+      <UniqueIdentifier>{A0E219C7-0C98-92BC-958C-8C93014189C0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Wire.h" />
     <ClInclude Include="src\Wire\Application.h">
       <Filter>Wire</Filter>
@@ -20,27 +29,35 @@
       <Filter>Wire</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Events\ApplicationEvent.h">
-      <Filter>Wire\Event</Filter>
+      <Filter>Wire\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Events\Event.h">
-      <Filter>Wire\Event</Filter>
+      <Filter>Wire\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Events\KeyEvent.h">
-      <Filter>Wire\Event</Filter>
+      <Filter>Wire\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Events\MouseEvent.h">
-      <Filter>Wire\Event</Filter>
+      <Filter>Wire\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Log.h">
       <Filter>Wire</Filter>
     </ClInclude>
+    <ClInclude Include="src\Wire\Window.h">
+      <Filter>Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wrpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\Wire\Application.cpp">
       <Filter>Wire</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\Log.cpp">
       <Filter>Wire</Filter>
     </ClCompile>
+    <ClCompile Include="src\wrpch.cpp" />
   </ItemGroup>
 </Project>

@@ -1,108 +1,123 @@
 workspace "Wire"
-    architecture "x64"
+	architecture "x64"
+	startproject "Sandbox"
 
-    configurations
-    {
-        "Debug",
-        "Release",
-        "Dist"
-    }
+	configurations
+	{
+		"Debug",
+		"Release",
+		"Dist"
+	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Wire/vendor/GLFW/include"
+
+include "Wire/vendor/GLFW"
+
 project "Wire"
-    location "Wire"
-    kind "SharedLib"
-    language "C++"
+	location "Wire"
+	kind "SharedLib"
+	language "C++"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files
-    {
-        "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp",
-    }
+	pchheader "wrpch.h"
+	pchsource "Wire/src/wrpch.cpp"
 
-    includedirs
-    {
-        "%{prj.name}/vendor/spdlog/include",
-        "Wire/src"
-    }
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
 
-    filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
-        systemversion "latest"
+	includedirs
+	{
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
 
-        defines
-        {
-            "WR_PLATFORM_WINDOWS",
-            "WR_BUILD_DLL"
-        }
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
+	}
 
-        postbuildcommands
-        {
-            ("if not exist ..\\bin\\" .. outputdir .. "\\Sandbox mkdir ..\\bin\\" .. outputdir .. "\\Sandbox\\"),
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-        }
+	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "On"
+		systemversion "latest"
 
-    filter "configurations:Debug"
-        defines "WR_DEBUG"
-        symbols "On"
+		defines
+		{
+			"WR_PLATFORM_WINDOWS",
+			"WR_BUILD_DLL"
+		}
 
-    filter "configurations:Release"
-        defines "WR_RELEASE"
-        optimize "On"
+		postbuildcommands
+		{
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+		}
 
-    filter "configurations:Dist"
-        defines "WR_DIST"
-        optimize "On"
+	filter "configurations:Debug"
+		defines "WR_DEBUG"
+		symbols "On"
 
+	filter "configurations:Release"
+		defines "WR_RELEASE"
+		optimize "On"
+
+	filter "configurations:Dist"
+		defines "WR_DIST"
+		optimize "On"
 
 project "Sandbox"
-    location "Sandbox"
-    kind "ConsoleApp"
-    language "C++"
+	location "Sandbox"
+	kind "ConsoleApp"
+	language "C++"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files
-    {
-        "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp",
-    }
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
 
-    includedirs
-    {
-        "Wire/vendor/spdlog/include",
-        "Wire/src"
-    }
+	includedirs
+	{
+		"Wire/vendor/spdlog/include",
+		"Wire/src"
+	}
 
-    links
-    {
-        "Wire"
-    }
+	links
+	{
+		"Wire"
+	}
 
-    filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
-        systemversion "latest"
+	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "On"
+		systemversion "latest"
 
-        defines
-        {
-            "WR_PLATFORM_WINDOWS"
-        }
+		defines
+		{
+			"WR_PLATFORM_WINDOWS"
+		}
 
-    filter "configurations:Debug"
-        defines "WR_DEBUG"
-        symbols "On"
+	filter "configurations:Debug"
+		defines "WR_DEBUG"
+		symbols "On"
 
-    filter "configurations:Release"
-        defines "WR_RELEASE"
-        optimize "On"
+	filter "configurations:Release"
+		defines "WR_RELEASE"
+		optimize "On"
 
-    filter "configurations:Dist"
-        defines "WR_DIST"
-        optimize "On"
+	filter "configurations:Dist"
+		defines "WR_DIST"
+		optimize "On"

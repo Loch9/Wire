@@ -1,3 +1,6 @@
 [submodule "Wire/vendor/spdlog"]
 	path = Wire/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Wire/vendor/GLFW"]
+	path = Wire/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
