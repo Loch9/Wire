@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef WR_PLATFORM_WINDOWS
+#if WR_DYNAMIC_LINK
 	#ifdef WR_BUILD_DLL
 		#define WIRE_API __declspec(dllexport)
 	#else
 		#define WIRE_API __declspec(dllimport)
 	#endif
+#else
+    #define WIRE_API
+#endif
 #else
 	#error Wire only supports Windows!
 #endif
@@ -23,3 +27,5 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+#define WR_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
