@@ -2,6 +2,7 @@
 
 #include "Wire/Core.h"
 #include "Wire/Events/Event.h"
+#include "Wire/Core/Timestep.h"
 
 namespace Wire {
 
@@ -13,7 +14,7 @@ namespace Wire {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

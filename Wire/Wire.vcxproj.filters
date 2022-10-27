@@ -1196,6 +1196,9 @@
     <ClInclude Include="src\Wire\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Wire\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Wire\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Wire\Core\Timestep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1235,5 +1238,7 @@
     <ClCompile Include="src\Wire\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Wire\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Wire\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
   </ItemGroup>
 </Project>
