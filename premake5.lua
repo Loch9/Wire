@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Wire/vendor/GLFW/include"
 IncludeDir["Glad"] = "Wire/vendor/Glad/include"
 IncludeDir["ImGui"] = "Wire/vendor/imgui"
 IncludeDir["glm"] = "Wire/vendor/glm"
+IncludeDir["stb_image"] = "Wire/vendor/stb_image"
 
 include "Wire/vendor/GLFW"
 include "Wire/vendor/Glad"
@@ -38,6 +39,8 @@ project "Wire"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -54,7 +57,9 @@ project "Wire"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
+
 	}
 
 	links 

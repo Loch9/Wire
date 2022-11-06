@@ -1,6 +1,5 @@
 #pragma once
 
-// From glfw3.h
 #define WR_KEY_SPACE              32
 #define WR_KEY_APOSTROPHE         39  /* ' */
 #define WR_KEY_COMMA              44  /* , */
@@ -49,8 +48,8 @@
 #define WR_KEY_BACKSLASH          92  /* \ */
 #define WR_KEY_RIGHT_BRACKET      93  /* ] */
 #define WR_KEY_GRAVE_ACCENT       96  /* ` */
-#define WR_KEY_WORLD_1            161 /* non-US #1 */
-#define WR_KEY_WORLD_2            162 /* non-US #2 */
+#define WR_KEY_WORLD_1            161
+#define WR_KEY_WORLD_2            162
 
 /* Function keys */
 #define WR_KEY_ESCAPE             256

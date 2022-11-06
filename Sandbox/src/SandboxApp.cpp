@@ -1,8 +1,11 @@
 #include <Wire.h>
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Wire::Layer
 {
@@ -18,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 		};
 
-		std::shared_ptr<Wire::VertexBuffer> vertexBuffer;
+		Wire::Ref<Wire::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Wire::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Wire::BufferLayout layout = {
 			{ Wire::ShaderDataType::Float3, "a_Position" },
@@ -29,28 +32,29 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Wire::IndexBuffer> indexBuffer;
+		Wire::Ref<Wire::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Wire::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA.reset(Wire::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<Wire::VertexBuffer> squareVB;
+		Wire::Ref<Wire::VertexBuffer> squareVB;
 		squareVB.reset(Wire::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{ Wire::ShaderDataType::Float3, "a_Position" },
+			{ Wire::ShaderDataType::Float2, "a_TexCoord" },
 		});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Wire::IndexBuffer> squareIB;
+		Wire::Ref<Wire::IndexBuffer> squareIB;
 		squareIB.reset(Wire::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -91,7 +95,7 @@ public:
 
 		m_Shader.reset(Wire::Shader::Create(vertexSrc, fragmentSrc));
 
-		std::string blueShaderVertexSrc = R"(
+		std::string flatColourShaderVertexSrc = R"(
 			#version 330 core
 
 			layout(location = 0) in vec3 a_Position;
@@ -108,20 +112,30 @@ public:
 			}
 		)";
 
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColourShaderFragmentSrc = R"(
 			#version 330 core
 
 			layout(location = 0) out vec4 colour;
 
 			in vec3 v_Position;
 
+			uniform vec3 u_Colour;
+
 			void main()
 			{
-				colour = vec4(0.2, 0.3, 0.8, 1.0);
+				colour = vec4(u_Colour, 1.0);
 			}
 		)";
 
-		m_BlueShader.reset(Wire::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_FlatColourShader.reset(Wire::Shader::Create(flatColourShaderVertexSrc, flatColourShaderFragmentSrc));
+
+		m_TextureShader.reset(Wire::Shader::Create("assets/shaders/Texture.glsl"));
+
+		m_Texture = Wire::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_WeatherIconTexture = Wire::Texture2D::Create("assets/textures/WireLogo.png");
+
+		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Wire::Timestep ts) override
@@ -151,24 +165,34 @@ public:
 
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_FlatColourShader)->Bind();
+		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_FlatColourShader)->UploadUniformFloat3("u_Colour", m_SquareColour);
+
 		for (int y = 0; y < 20; y++)
 		{
 			for (int x = 0; x < 20; x++)
 			{
 				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				Wire::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+				Wire::Renderer::Submit(m_FlatColourShader, m_SquareVA, transform);
 			}
 		}
+		
+		m_Texture->Bind();
+		Wire::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_WeatherIconTexture->Bind();
+		Wire::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
-		Wire::Renderer::Submit(m_Shader, m_VertexArray);
+		//Wire::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Wire::Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override
 	{
-
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Colour", glm::value_ptr(m_SquareColour));
+		ImGui::End();
 	}
 
 	void OnEvent(Wire::Event& event) override
@@ -176,17 +200,22 @@ public:
 
 	}
 private:
-	std::shared_ptr<Wire::Shader> m_Shader;
-	std::shared_ptr<Wire::VertexArray> m_VertexArray;
+	Wire::Ref<Wire::Shader> m_Shader;
+	Wire::Ref<Wire::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Wire::Shader> m_BlueShader;
-	std::shared_ptr<Wire::VertexArray> m_SquareVA;
+	Wire::Ref<Wire::Shader> m_FlatColourShader, m_TextureShader;
+	Wire::Ref<Wire::VertexArray> m_SquareVA;
+
+	Wire::Ref<Wire::Texture2D> m_Texture, m_WeatherIconTexture;
 
 	Wire::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
 	float m_CameraRotation = 0;
+
 	float m_CameraMoveSpeed = 5;
 	float m_CameraRotationSpeed = 180;
+
+	glm::vec3 m_SquareColour = { 0.2f, 0.3f, 0.8f };
 };
 
 class Sandbox : public Wire::Application

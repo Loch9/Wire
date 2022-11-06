@@ -19,9 +19,11 @@
 
 #include "Wire/Renderer/Buffer.h"
 #include "Wire/Renderer/Shader.h"
+#include "Wire/Renderer/Texture.h"
 #include "Wire/Renderer/VertexArray.h"
 
 #include "Wire/Renderer/OrthographicCamera.h"
+
 // -----------------------------------------
 
 // ------- Entry Point ---------------------
