@@ -93,7 +93,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Wire::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Wire::Shader::Create("VertexPosColour", vertexSrc, fragmentSrc);
 
 		std::string flatColourShaderVertexSrc = R"(
 			#version 330 core
@@ -127,15 +127,15 @@ public:
 			}
 		)";
 
-		m_FlatColourShader.reset(Wire::Shader::Create(flatColourShaderVertexSrc, flatColourShaderFragmentSrc));
+		m_FlatColourShader = Wire::Shader::Create("FlasColour", flatColourShaderVertexSrc, flatColourShaderFragmentSrc);
 
-		m_TextureShader.reset(Wire::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = Wire::Texture2D::Create("assets/textures/Checkerboard.png");
-		m_WeatherIconTexture = Wire::Texture2D::Create("assets/textures/WireLogo.png");
+		m_WireLogoTexture = Wire::Texture2D::Create("assets/textures/WireLogo.png");
 
-		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Wire::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Wire::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Wire::Timestep ts) override
@@ -178,10 +178,12 @@ public:
 			}
 		}
 		
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Wire::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-		m_WeatherIconTexture->Bind();
-		Wire::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Wire::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_WireLogoTexture->Bind();
+		Wire::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		//Wire::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -200,13 +202,14 @@ public:
 
 	}
 private:
+	Wire::ShaderLibrary m_ShaderLibrary;
 	Wire::Ref<Wire::Shader> m_Shader;
 	Wire::Ref<Wire::VertexArray> m_VertexArray;
 
-	Wire::Ref<Wire::Shader> m_FlatColourShader, m_TextureShader;
+	Wire::Ref<Wire::Shader> m_FlatColourShader;
 	Wire::Ref<Wire::VertexArray> m_SquareVA;
 
-	Wire::Ref<Wire::Texture2D> m_Texture, m_WeatherIconTexture;
+	Wire::Ref<Wire::Texture2D> m_Texture, m_WireLogoTexture;
 
 	Wire::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
