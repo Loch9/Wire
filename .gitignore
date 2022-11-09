@@ -5,6 +5,7 @@ bin-int/
 !vendor/premake5/bin
 
 # Files
+Sandbox/imgui.ini
 *.user
 *.sln
 *.vcxproj

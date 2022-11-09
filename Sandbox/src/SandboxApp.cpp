@@ -11,7 +11,7 @@ class ExampleLayer : public Wire::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
 		m_VertexArray.reset(Wire::VertexArray::Create());
 
@@ -127,7 +127,7 @@ public:
 			}
 		)";
 
-		m_FlatColourShader = Wire::Shader::Create("FlasColour", flatColourShaderVertexSrc, flatColourShaderFragmentSrc);
+		m_FlatColourShader = Wire::Shader::Create("FlatColour", flatColourShaderVertexSrc, flatColourShaderFragmentSrc);
 
 		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
@@ -140,28 +140,12 @@ public:
 
 	void OnUpdate(Wire::Timestep ts) override
 	{
-		if (Wire::Input::IsKeyPressed(WR_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		else if (Wire::Input::IsKeyPressed(WR_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (Wire::Input::IsKeyPressed(WR_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		else if (Wire::Input::IsKeyPressed(WR_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		if (Wire::Input::IsKeyPressed(WR_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		else if (Wire::Input::IsKeyPressed(WR_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
+		m_CameraController.OnUpdate(ts);
 
 		Wire::RenderCommand::SetClearColour({ 0.1f, 0.1f, 0.1f, 1 });
 		Wire::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
-		Wire::Renderer::BeginScene(m_Camera);
+		Wire::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -197,9 +181,9 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(Wire::Event& event) override
+	void OnEvent(Wire::Event& e) override
 	{
-
+		m_CameraController.OnEvent(e);
 	}
 private:
 	Wire::ShaderLibrary m_ShaderLibrary;
@@ -211,13 +195,7 @@ private:
 
 	Wire::Ref<Wire::Texture2D> m_Texture, m_WireLogoTexture;
 
-	Wire::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
-	float m_CameraRotation = 0;
-
-	float m_CameraMoveSpeed = 5;
-	float m_CameraRotationSpeed = 180;
-
+	Wire::OrthographicCameraController m_CameraController;
 	glm::vec3 m_SquareColour = { 0.2f, 0.3f, 0.8f };
 };
 

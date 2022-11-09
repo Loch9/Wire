@@ -9,6 +9,7 @@
 #include "Wire/Input.h"
 #include "Wire/KeyCodes.h"
 #include "Wire/MouseButtonCodes.h"
+#include "Wire/OrthographicCameraController.h"
 
 #include "Wire/ImGui/ImGuiLayer.h"
 
