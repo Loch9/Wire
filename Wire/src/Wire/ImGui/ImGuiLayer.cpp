@@ -5,7 +5,7 @@
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
-#include "Wire/Application.h"
+#include "Wire/Core/Application.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
@@ -18,12 +18,9 @@ namespace Wire {
 	{
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
-
 	void ImGuiLayer::OnAttach()
 	{
+		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -34,6 +31,7 @@ namespace Wire {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
+		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
 

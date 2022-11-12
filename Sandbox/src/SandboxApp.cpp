@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include <Wire/Core/EntryPoint.h>
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
@@ -7,18 +8,20 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2D.h"
+
 class ExampleLayer : public Wire::Layer
 {
 public:
 	ExampleLayer()
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
-		m_VertexArray.reset(Wire::VertexArray::Create());
+		m_VertexArray = Wire::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
 		Wire::Ref<Wire::VertexBuffer> vertexBuffer;
@@ -27,7 +30,6 @@ public:
 			{ Wire::ShaderDataType::Float3, "a_Position" },
 			{ Wire::ShaderDataType::Float4, "a_Colour" }
 		};
-
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
@@ -36,12 +38,12 @@ public:
 		indexBuffer.reset(Wire::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		m_SquareVA.reset(Wire::VertexArray::Create());
+		m_SquareVA = Wire::VertexArray::Create();
 
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
@@ -49,7 +51,7 @@ public:
 		squareVB.reset(Wire::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{ Wire::ShaderDataType::Float3, "a_Position" },
-			{ Wire::ShaderDataType::Float2, "a_TexCoord" },
+			{ Wire::ShaderDataType::Float2, "a_TexCoord" }
 		});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -60,7 +62,7 @@ public:
 
 		std::string vertexSrc = R"(
 			#version 330 core
-
+			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Colour;
 
@@ -74,17 +76,17 @@ public:
 			{
 				v_Position = a_Position;
 				v_Colour = a_Colour;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
 		std::string fragmentSrc = R"(
 			#version 330 core
+			
+			layout(location = 0) out vec4 colour;
 
 			in vec3 v_Position;
 			in vec4 v_Colour;
-
-			layout(location = 0) out vec4 colour;
 
 			void main()
 			{
@@ -97,7 +99,7 @@ public:
 
 		std::string flatColourShaderVertexSrc = R"(
 			#version 330 core
-
+			
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
@@ -108,17 +110,17 @@ public:
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
 		std::string flatColourShaderFragmentSrc = R"(
 			#version 330 core
-
+			
 			layout(location = 0) out vec4 colour;
 
 			in vec3 v_Position;
-
+			
 			uniform vec3 u_Colour;
 
 			void main()
@@ -132,7 +134,7 @@ public:
 		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = Wire::Texture2D::Create("assets/textures/Checkerboard.png");
-		m_WireLogoTexture = Wire::Texture2D::Create("assets/textures/WireLogo.png");
+		m_ChernoLogoTexture = Wire::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		std::dynamic_pointer_cast<Wire::OpenGLShader>(textureShader)->Bind();
 		std::dynamic_pointer_cast<Wire::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
@@ -140,14 +142,16 @@ public:
 
 	void OnUpdate(Wire::Timestep ts) override
 	{
+		// Update
 		m_CameraController.OnUpdate(ts);
 
+		// Render
 		Wire::RenderCommand::SetClearColour({ 0.1f, 0.1f, 0.1f, 1 });
 		Wire::RenderCommand::Clear();
 
 		Wire::Renderer::BeginScene(m_CameraController.GetCamera());
 
-		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_FlatColourShader)->Bind();
 		std::dynamic_pointer_cast<Wire::OpenGLShader>(m_FlatColourShader)->UploadUniformFloat3("u_Colour", m_SquareColour);
@@ -161,15 +165,16 @@ public:
 				Wire::Renderer::Submit(m_FlatColourShader, m_SquareVA, transform);
 			}
 		}
-		
+
 		auto textureShader = m_ShaderLibrary.Get("Texture");
 
 		m_Texture->Bind();
 		Wire::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-		m_WireLogoTexture->Bind();
+		m_ChernoLogoTexture->Bind();
 		Wire::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
-		//Wire::Renderer::Submit(m_Shader, m_VertexArray);
+		// Triangle
+		// Wire::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Wire::Renderer::EndScene();
 	}
@@ -193,7 +198,7 @@ private:
 	Wire::Ref<Wire::Shader> m_FlatColourShader;
 	Wire::Ref<Wire::VertexArray> m_SquareVA;
 
-	Wire::Ref<Wire::Texture2D> m_Texture, m_WireLogoTexture;
+	Wire::Ref<Wire::Texture2D> m_Texture, m_ChernoLogoTexture;
 
 	Wire::OrthographicCameraController m_CameraController;
 	glm::vec3 m_SquareColour = { 0.2f, 0.3f, 0.8f };
@@ -204,14 +209,13 @@ class Sandbox : public Wire::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		// PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox()
 	{
-
 	}
-
 };
 
 Wire::Application* Wire::CreateApplication()

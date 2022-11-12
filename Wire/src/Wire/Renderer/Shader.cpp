@@ -10,8 +10,8 @@ namespace Wire {
 	{
 		switch (Renderer::GetAPI())
 		{
-			case RendererAPI::API::None:	WR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:	return std::make_shared<OpenGLShader>(filepath);
+			case RendererAPI::API::None:    WR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(filepath);
 		}
 
 		WR_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -22,8 +22,8 @@ namespace Wire {
 	{
 		switch (Renderer::GetAPI())
 		{
-			case RendererAPI::API::None:	WR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:	return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+			case RendererAPI::API::None:    WR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
 
 		WR_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -52,7 +52,7 @@ namespace Wire {
 	Ref<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
-		Add(shader);
+		Add(name, shader);
 		return shader;
 	}
 

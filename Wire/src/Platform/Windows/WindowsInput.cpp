@@ -1,12 +1,12 @@
 #include "wrpch.h"
 #include "WindowsInput.h"
 
-#include "Wire/Application.h"
+#include "Wire/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Wire {
 
-	Input* Input::s_Instance = new WindowsInput();
+	Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{

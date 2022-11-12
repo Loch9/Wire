@@ -81,17 +81,38 @@
     <ClInclude Include="src\Wire.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wire\Application.h">
-      <Filter>src\Wire</Filter>
+    <ClInclude Include="src\Wire\Core\Application.h">
+      <Filter>src\Wire\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wire\Core.h">
-      <Filter>src\Wire</Filter>
+    <ClInclude Include="src\Wire\Core\Core.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\EntryPoint.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\Input.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\KeyCodes.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\Layer.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\LayerStack.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\Log.h">
+      <Filter>src\Wire\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Core\MouseButtonCodes.h">
+      <Filter>src\Wire\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Core\Timestep.h">
       <Filter>src\Wire\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wire\EntryPoint.h">
-      <Filter>src\Wire</Filter>
+    <ClInclude Include="src\Wire\Core\Window.h">
+      <Filter>src\Wire\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Events\ApplicationEvent.h">
       <Filter>src\Wire\Events</Filter>
@@ -108,24 +129,6 @@
     <ClInclude Include="src\Wire\ImGui\ImGuiLayer.h">
       <Filter>src\Wire\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wire\Input.h">
-      <Filter>src\Wire</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wire\KeyCodes.h">
-      <Filter>src\Wire</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wire\Layer.h">
-      <Filter>src\Wire</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wire\LayerStack.h">
-      <Filter>src\Wire</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wire\Log.h">
-      <Filter>src\Wire</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wire\MouseButtonCodes.h">
-      <Filter>src\Wire</Filter>
-    </ClInclude>
     <ClInclude Include="src\Wire\Renderer\Buffer.h">
       <Filter>src\Wire\Renderer</Filter>
     </ClInclude>
@@ -135,10 +138,16 @@
     <ClInclude Include="src\Wire\Renderer\OrthographicCamera.h">
       <Filter>src\Wire\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Wire\Renderer\OrthographicCameraController.h">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Wire\Renderer\RenderCommand.h">
       <Filter>src\Wire\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Renderer\Renderer.h">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Renderer\Renderer2D.h">
       <Filter>src\Wire\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Renderer\RendererAPI.h">
@@ -152,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="src\Wire\Renderer\VertexArray.h">
       <Filter>src\Wire\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wire\Window.h">
-      <Filter>src\Wire</Filter>
     </ClInclude>
     <ClInclude Include="src\wrpch.h">
       <Filter>src</Filter>
@@ -1248,7 +1254,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wire\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1275,8 +1280,17 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wire\Application.cpp">
-      <Filter>src\Wire</Filter>
+    <ClCompile Include="src\Wire\Core\Application.cpp">
+      <Filter>src\Wire\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wire\Core\Layer.cpp">
+      <Filter>src\Wire\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wire\Core\LayerStack.cpp">
+      <Filter>src\Wire\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wire\Core\Log.cpp">
+      <Filter>src\Wire\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\ImGui\ImGuiBuild.cpp">
       <Filter>src\Wire\ImGui</Filter>
@@ -1284,25 +1298,22 @@
     <ClCompile Include="src\Wire\ImGui\ImGuiLayer.cpp">
       <Filter>src\Wire\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wire\Layer.cpp">
-      <Filter>src\Wire</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Wire\LayerStack.cpp">
-      <Filter>src\Wire</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Wire\Log.cpp">
-      <Filter>src\Wire</Filter>
-    </ClCompile>
     <ClCompile Include="src\Wire\Renderer\Buffer.cpp">
       <Filter>src\Wire\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\Renderer\OrthographicCamera.cpp">
       <Filter>src\Wire\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Wire\Renderer\OrthographicCameraController.cpp">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Wire\Renderer\RenderCommand.cpp">
       <Filter>src\Wire\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\Renderer\Renderer.cpp">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wire\Renderer\Renderer2D.cpp">
       <Filter>src\Wire\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\Renderer\RendererAPI.cpp">
@@ -1323,6 +1334,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wire\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

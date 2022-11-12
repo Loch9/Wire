@@ -8,6 +8,11 @@ workspace "Wire"
 		"Release",
 		"Dist"
 	}
+	
+	flags
+	{
+		"MultiProcessorCompile"
+	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -18,9 +23,11 @@ IncludeDir["ImGui"] = "Wire/vendor/imgui"
 IncludeDir["glm"] = "Wire/vendor/glm"
 IncludeDir["stb_image"] = "Wire/vendor/stb_image"
 
-include "Wire/vendor/GLFW"
-include "Wire/vendor/Glad"
-include "Wire/vendor/imgui"
+group "Dependencies"
+	include "Wire/vendor/GLFW"
+	include "Wire/vendor/Glad"
+	include "Wire/vendor/imgui"
+group ""
 
 project "Wire"
 	location "Wire"
@@ -75,7 +82,6 @@ project "Wire"
 
 		defines
 		{
-			"WR_PLATFORM_WINDOWS",
 			"WR_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
@@ -126,11 +132,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines
-		{
-			"WR_PLATFORM_WINDOWS"
-		}
 
 	filter "configurations:Debug"
 		defines "WR_DEBUG"

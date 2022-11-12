@@ -4,22 +4,22 @@
 #include <glad/glad.h>
 
 namespace Wire {
-	
+
 	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 	{
 		switch (type)
 		{
-			case ShaderDataType::Float:  return GL_FLOAT;
-			case ShaderDataType::Float2: return GL_FLOAT;
-			case ShaderDataType::Float3: return GL_FLOAT;
-			case ShaderDataType::Float4: return GL_FLOAT;
-			case ShaderDataType::Mat3:   return GL_FLOAT;
-			case ShaderDataType::Mat4:   return GL_FLOAT;
-			case ShaderDataType::Int:    return GL_INT;
-			case ShaderDataType::Int2:   return GL_INT;
-			case ShaderDataType::Int3:   return GL_INT;
-			case ShaderDataType::Int4:   return GL_INT;
-			case ShaderDataType::Bool:   return GL_BOOL;
+			case Wire::ShaderDataType::Float:    return GL_FLOAT;
+			case Wire::ShaderDataType::Float2:   return GL_FLOAT;
+			case Wire::ShaderDataType::Float3:   return GL_FLOAT;
+			case Wire::ShaderDataType::Float4:   return GL_FLOAT;
+			case Wire::ShaderDataType::Mat3:     return GL_FLOAT;
+			case Wire::ShaderDataType::Mat4:     return GL_FLOAT;
+			case Wire::ShaderDataType::Int:      return GL_INT;
+			case Wire::ShaderDataType::Int2:     return GL_INT;
+			case Wire::ShaderDataType::Int3:     return GL_INT;
+			case Wire::ShaderDataType::Int4:     return GL_INT;
+			case Wire::ShaderDataType::Bool:     return GL_BOOL;
 		}
 
 		WR_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -46,31 +46,30 @@ namespace Wire {
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
 		WR_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
 		glBindVertexArray(m_RendererID);
 		vertexBuffer->Bind();
 
-		uint32_t index = 0;
 		const auto& layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index,
+			glEnableVertexAttribArray(m_VertexBufferIndex);
+			glVertexAttribPointer(m_VertexBufferIndex,
 				element.GetComponentCount(),
 				ShaderDataTypeToOpenGLBaseType(element.Type),
-				element.Normalised ? GL_TRUE : GL_FALSE,
+				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
 				(const void*)element.Offset);
-			index++;
+			m_VertexBufferIndex++;
 		}
 
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
+	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();

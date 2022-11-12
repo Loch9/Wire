@@ -4,7 +4,7 @@
 
 namespace Wire {
 
-	class WIRE_API KeyEvent : public Event
+	class HAZEL_API KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -17,7 +17,7 @@ namespace Wire {
 		int m_KeyCode;
 	};
 
-	class WIRE_API KeyPressedEvent : public KeyEvent
+	class HAZEL_API KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -37,7 +37,7 @@ namespace Wire {
 		int m_RepeatCount;
 	};
 
-	class WIRE_API KeyReleasedEvent : public KeyEvent
+	class HAZEL_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -53,7 +53,7 @@ namespace Wire {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class WIRE_API KeyTypedEvent : public KeyEvent
+	class HAZEL_API KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

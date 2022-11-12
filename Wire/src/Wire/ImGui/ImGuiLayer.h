@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Wire/Layer.h"
+#include "Wire/Core/Layer.h"
 
 #include "Wire/Events/ApplicationEvent.h"
 #include "Wire/Events/KeyEvent.h"
@@ -8,11 +8,11 @@
 
 namespace Wire {
 
-	class WIRE_API ImGuiLayer : public Layer
+	class HAZEL_API ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();
-		~ImGuiLayer();
+		~ImGuiLayer() = default;
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;

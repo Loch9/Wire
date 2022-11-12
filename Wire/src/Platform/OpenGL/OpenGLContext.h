@@ -9,7 +9,7 @@ namespace Wire {
 	class OpenGLContext : public GraphicsContext
 	{
 	public:
-		OpenGLContext(GLFWwindow* winowHandle);
+		OpenGLContext(GLFWwindow* windowHandle);
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;

@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include "Wire/Core.h"
+
+#include "Wire/Core/Core.h"
 
 namespace Wire {
 

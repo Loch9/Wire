@@ -6,8 +6,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <random>
-
 #include <string>
 #include <sstream>
 #include <array>
@@ -15,8 +13,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Wire/Log.h"
+#include "Wire/Core/Log.h"
 
-#ifdef WR_PLATFORM_WINDOWS
+#ifdef HZ_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

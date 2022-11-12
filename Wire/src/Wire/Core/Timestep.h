@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Wire {
-	
+
 	class Timestep
 	{
 	public:

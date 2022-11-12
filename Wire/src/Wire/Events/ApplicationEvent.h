@@ -4,7 +4,7 @@
 
 namespace Wire {
 
-	class WIRE_API WindowResizeEvent : public Event
+	class HAZEL_API WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
@@ -26,7 +26,7 @@ namespace Wire {
 		unsigned int m_Width, m_Height;
 	};
 
-	class WIRE_API WindowCloseEvent : public Event
+	class HAZEL_API WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() {}
@@ -35,7 +35,7 @@ namespace Wire {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class WIRE_API AppTickEvent : public Event
+	class HAZEL_API AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() {}
@@ -44,7 +44,7 @@ namespace Wire {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class WIRE_API AppUpdateEvent : public Event
+	class HAZEL_API AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent() {}
@@ -53,7 +53,7 @@ namespace Wire {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class WIRE_API AppRenderEvent : public Event
+	class HAZEL_API AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent() {}

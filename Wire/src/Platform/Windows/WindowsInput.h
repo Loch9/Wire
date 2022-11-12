@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Wire/Input.h"
+#include "Wire/Core/Input.h"
 
 namespace Wire {
 
