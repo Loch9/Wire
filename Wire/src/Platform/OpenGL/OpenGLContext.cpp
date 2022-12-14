@@ -1,7 +1,7 @@
 #include "wrpch.h"
 #include "OpenGLContext.h"
 
-#include <GLFW/glfw3.h>
+#include <glfw/glfw3.h>
 #include <glad/glad.h>
 #include <GL/GL.h>
 
@@ -15,6 +15,8 @@ namespace Wire {
 
 	void OpenGLContext::Init()
 	{
+		WR_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		WR_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -36,6 +38,8 @@ namespace Wire {
 
 	void OpenGLContext::SwapBuffers()
 	{
+		WR_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 

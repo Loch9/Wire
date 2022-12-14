@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core.h"
+#include "Wire/Core/Core.h"
 
-#include "Window.h"
+#include "Wire/Core/Window.h"
 #include "Wire/Core/LayerStack.h"
 #include "Wire/Events/Event.h"
 #include "Wire/Events/ApplicationEvent.h"
@@ -17,7 +17,7 @@ namespace Wire {
 	{
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 
 		void Run();
 
@@ -43,7 +43,6 @@ namespace Wire {
 		static Application* s_Instance;
 	};
 
-	// To be defined in CLIENT
 	Application* CreateApplication();
 
 }

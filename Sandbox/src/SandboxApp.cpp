@@ -24,8 +24,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		Wire::Ref<Wire::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Wire::VertexBuffer::Create(vertices, sizeof(vertices)));
+		Wire::Ref<Wire::VertexBuffer> vertexBuffer = Wire::VertexBuffer::Create(vertices, sizeof(vertices));
 		Wire::BufferLayout layout = {
 			{ Wire::ShaderDataType::Float3, "a_Position" },
 			{ Wire::ShaderDataType::Float4, "a_Colour" }
@@ -34,8 +33,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		Wire::Ref<Wire::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Wire::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		Wire::Ref<Wire::IndexBuffer> indexBuffer = Wire::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA = Wire::VertexArray::Create();
@@ -47,8 +45,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		Wire::Ref<Wire::VertexBuffer> squareVB;
-		squareVB.reset(Wire::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		Wire::Ref<Wire::VertexBuffer> squareVB = Wire::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout({
 			{ Wire::ShaderDataType::Float3, "a_Position" },
 			{ Wire::ShaderDataType::Float2, "a_TexCoord" }
@@ -56,8 +53,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		Wire::Ref<Wire::IndexBuffer> squareIB;
-		squareIB.reset(Wire::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		Wire::Ref<Wire::IndexBuffer> squareIB = Wire::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		std::string vertexSrc = R"(

@@ -1,7 +1,7 @@
 #include "wrpch.h"
-#include "Shader.h"
+#include "Wire/Renderer/Shader.h"
 
-#include "Renderer.h"
+#include "Wire/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Wire {
@@ -11,7 +11,7 @@ namespace Wire {
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    WR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(filepath);
+			case RendererAPI::API::OpenGL:  return CreateRef<OpenGLShader>(filepath);
 		}
 
 		WR_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -23,7 +23,7 @@ namespace Wire {
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    WR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+			case RendererAPI::API::OpenGL:  return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
 
 		WR_CORE_ASSERT(false, "Unknown RendererAPI!");

@@ -3,7 +3,7 @@
 #include "Wire/Core/Window.h"
 #include "Wire/Renderer/GraphicsContext.h"
 
-#include <GLFW/glfw3.h>
+#include <glfw/glfw3.h>
 
 namespace Wire {
 

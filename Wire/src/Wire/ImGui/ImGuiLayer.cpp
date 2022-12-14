@@ -1,14 +1,13 @@
 #include "wrpch.h"
-#include "ImGuiLayer.h"
+#include "Wire/ImGui/ImGuiLayer.h"
 
-#include "imgui.h"
-#include "examples/imgui_impl_glfw.h"
-#include "examples/imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 
 #include "Wire/Core/Application.h"
 
-// TEMPORARY
-#include <GLFW/glfw3.h>
+#include <glfw/glfw3.h>
 #include <glad/glad.h>
 
 namespace Wire {
@@ -20,6 +19,8 @@ namespace Wire {
 
 	void ImGuiLayer::OnAttach()
 	{
+		WR_PROFILE_FUNCTION();
+
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -53,6 +54,8 @@ namespace Wire {
 
 	void ImGuiLayer::OnDetach()
 	{
+		WR_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -60,6 +63,8 @@ namespace Wire {
 	
 	void ImGuiLayer::Begin()
 	{
+		WR_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -67,6 +72,8 @@ namespace Wire {
 
 	void ImGuiLayer::End()
 	{
+		WR_PROFILE_FUNCTION();
+
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
 		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
@@ -82,12 +89,6 @@ namespace Wire {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 		}
-	}
-
-	void ImGuiLayer::OnImGuiRender()
-	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
 	}
 
 }

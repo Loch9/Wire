@@ -1,16 +1,16 @@
 #pragma once
 
 #include "Wire/Core/Core.h"
-#include "Layer.h"
+#include "Wire/Core/Layer.h"
 
 #include <vector>
 
 namespace Wire {
 
-	class HAZEL_API LayerStack
+	class LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);

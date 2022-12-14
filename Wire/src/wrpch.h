@@ -15,6 +15,8 @@
 
 #include "Wire/Core/Log.h"
 
+#include "Wire/Debug/Instrumentor.h"
+
 #ifdef HZ_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

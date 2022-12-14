@@ -1,6 +1,5 @@
 #pragma once
 
-// From glfw3.h
 #define WR_KEY_SPACE              32
 #define WR_KEY_APOSTROPHE         39  /* ' */
 #define WR_KEY_COMMA              44  /* , */

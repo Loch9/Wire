@@ -1,8 +1,8 @@
 #include "wrpch.h"
-#include "WindowsInput.h"
+#include "Platform/Windows/WindowsInput.h"
 
 #include "Wire/Core/Application.h"
-#include <GLFW/glfw3.h>
+#include <glfw/glfw3.h>
 
 namespace Wire {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Wire.h"
+#include <Wire.h>
 
 class Sandbox2D : public Wire::Layer
 {
@@ -17,7 +17,6 @@ public:
 private:
 	Wire::OrthographicCameraController m_CameraController;
 	
-	// Temp
 	Wire::Ref<Wire::VertexArray> m_SquareVA;
 	Wire::Ref<Wire::Shader> m_FlatColourShader;
 

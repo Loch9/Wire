@@ -1,14 +1,9 @@
 #pragma once
-
 #include "wrpch.h"
+
 #include "Wire/Core/Core.h"
 
 namespace Wire {
-
-	// Events in Wire are currently blocking, meaning when an event occurs it
-	// immediately gets dispatched and must be dealt with right then an there.
-	// For the future, a better strategy might be to buffer events in an event
-	// bus and process them during the "event" part of the update stage.
 
 	enum class EventType
 	{
@@ -35,7 +30,7 @@ namespace Wire {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class HAZEL_API Event
+	class Event
 	{
 	public:
 		bool Handled = false;
@@ -59,7 +54,6 @@ namespace Wire {
 		{
 		}
 		
-		// F will be deduced by the compiler
 		template<typename T, typename F>
 		bool Dispatch(const F& func)
 		{
