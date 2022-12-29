@@ -3,9 +3,14 @@
 !vendor/premake5/bin/
 bin-int/
 
-# Visual Studio files and folder
+# Visual Studio files and folders
 .vs/
 **.sln
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+
+# Other files
+WireProfile-Runtime.json
+WireProfile-Shutdown.json
+WireProfile-Startup.json
