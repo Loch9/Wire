@@ -1,11 +1,11 @@
 #include "wrpch.h"
-#include "Wire/Core/Application.h"
+#include "Application.h"
 
-#include "Wire/Core/Log.h"
+#include "Log.h"
 
 #include "Wire/Renderer/Renderer.h"
 
-#include "Wire/Core/Input.h"
+#include "Input.h"
 
 #include <glfw/glfw3.h>
 
@@ -13,13 +13,13 @@ namespace Wire {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		WR_PROFILE_FUNCTION();
 
 		WR_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
-		m_Window = Window::Create();
+		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(WR_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
@@ -49,6 +49,11 @@ namespace Wire {
 
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
+	}
+
+	void Application::Close()
+	{
+		m_Running = false;
 	}
 
 	void Application::OnEvent(Event& e)

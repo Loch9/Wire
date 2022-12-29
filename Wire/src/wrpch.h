@@ -17,6 +17,6 @@
 
 #include "Wire/Debug/Instrumentor.h"
 
-#ifdef HZ_PLATFORM_WINDOWS
+#ifdef WR_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

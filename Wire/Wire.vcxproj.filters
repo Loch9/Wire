@@ -19,6 +19,9 @@
     <Filter Include="src\Wire\Core">
       <UniqueIdentifier>{EBDDA2E5-579E-1E1C-20D9-67998C5863F8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Wire\Debug">
+      <UniqueIdentifier>{69F60A9A-55C4-FE9F-3E58-6FC62AC5DA04}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Wire\Events">
       <UniqueIdentifier>{3716F4DE-A3A1-61A3-ACB2-E49718BDBDA3}</UniqueIdentifier>
     </Filter>
@@ -58,6 +61,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
@@ -114,6 +120,9 @@
     <ClInclude Include="src\Wire\Core\Window.h">
       <Filter>src\Wire\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Wire\Debug\Instrumentor.h">
+      <Filter>src\Wire\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Wire\Events\ApplicationEvent.h">
       <Filter>src\Wire\Events</Filter>
     </ClInclude>
@@ -130,6 +139,9 @@
       <Filter>src\Wire\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Renderer\Buffer.h">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wire\Renderer\Framebuffer.h">
       <Filter>src\Wire\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Wire\Renderer\GraphicsContext.h">
@@ -1254,13 +1266,15 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wire\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1293,6 +1307,9 @@
     <ClCompile Include="src\Wire\Core\Log.cpp">
       <Filter>src\Wire\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Wire\Core\Window.cpp">
+      <Filter>src\Wire\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Wire\ImGui\ImGuiBuild.cpp">
       <Filter>src\Wire\ImGui</Filter>
     </ClCompile>
@@ -1300,6 +1317,12 @@
       <Filter>src\Wire\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\Renderer\Buffer.cpp">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wire\Renderer\Framebuffer.cpp">
+      <Filter>src\Wire\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wire\Renderer\GraphicsContext.cpp">
       <Filter>src\Wire\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Wire\Renderer\OrthographicCamera.cpp">
@@ -1335,6 +1358,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wire\Renderer\GraphicsContext.cpp" />
   </ItemGroup>
 </Project>

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Wire/Core/Core.h"
+#include "Core.h"
 
-#include "Wire/Core/Window.h"
-#include "Wire/Core/LayerStack.h"
+#include "Window.h"
+#include "LayerStack.h"
 #include "Wire/Events/Event.h"
 #include "Wire/Events/ApplicationEvent.h"
 
-#include "Wire/Core/Timestep.h"
+#include "Timestep.h"
 
 #include "Wire/ImGui/ImGuiLayer.h"
 
@@ -16,7 +16,7 @@ namespace Wire {
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Wire Designer");
 		virtual ~Application();
 
 		void Run();
@@ -27,6 +27,8 @@ namespace Wire {
 		void PushOverlay(Layer* layer);
 
 		inline Window& GetWindow() { return *m_Window; }
+
+		void Close();
 
 		inline static Application& Get() { return *s_Instance; }
 	private:

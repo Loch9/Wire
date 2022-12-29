@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Wire/Renderer/OrthographicCamera.h"
+#include "OrthographicCamera.h"
 
-#include "Wire/Renderer/Texture.h"
+#include "Texture.h"
 
 namespace Wire {
 

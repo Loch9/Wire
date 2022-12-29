@@ -65,7 +65,7 @@ void Sandbox2D::OnUpdate(Wire::Timestep ts)
 void Sandbox2D::OnImGuiRender()
 {
 	WR_PROFILE_FUNCTION();
-
+	
 	ImGui::Begin("Settings");
 
 	auto stats = Wire::Renderer2D::GetStats();
@@ -76,6 +76,7 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
 	ImGui::ColorEdit4("Square Colour", glm::value_ptr(m_SquareColour));
+
 	ImGui::End();
 }
 

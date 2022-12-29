@@ -1,6 +1,6 @@
 workspace "Wire"
 	architecture "x64"
-	startproject "Sandbox"
+	startproject "Wire-Designer"
 
 	configurations
 	{
@@ -103,6 +103,53 @@ project "Wire"
 
 project "Sandbox"
 	location "Sandbox"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"Wire/vendor/spdlog/include",
+		"Wire/src",
+		"Wire/vendor",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"Wire"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		defines "WR_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "WR_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "WR_DIST"
+		runtime "Release"
+		optimize "on"
+
+project "Wire-Designer"
+	location "Wire-Designer"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
