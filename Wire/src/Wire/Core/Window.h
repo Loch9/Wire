@@ -13,7 +13,7 @@ namespace Wire {
 		uint32_t Width;
 		uint32_t Height;
 
-		WindowProps(const std::string& title = "Wire Engine",
+		WindowProps(const std::string& title = "Wire Window",
 			        uint32_t width = 1280,
 			        uint32_t height = 720)
 			: Title(title), Width(width), Height(height)

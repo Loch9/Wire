@@ -16,6 +16,8 @@ namespace Wire {
 		void OnUpdate(Wire::Timestep ts) override;
 		virtual void OnImGuiRender() override;
 		void OnEvent(Wire::Event& e) override;
+
+		bool PrintSize(WindowResizeEvent& e);
 	private:
 		Wire::OrthographicCameraController m_CameraController;
 
@@ -25,9 +27,11 @@ namespace Wire {
 
 		Wire::Ref<Wire::Texture2D> m_CheckerboardTexture;
 
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
 		glm::vec2 m_ViewportSize = { 1280.0f, 720.0f };
 
 		glm::vec4 m_SquareColour = { 0.2f, 0.3f, 0.8f, 1.0f };
+
 	};
 
 }
