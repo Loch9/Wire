@@ -173,6 +173,8 @@
     <ClInclude Include="src\Wire\Events\KeyEvent.h" />
     <ClInclude Include="src\Wire\Events\MouseEvent.h" />
     <ClInclude Include="src\Wire\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Wire\Plugins\IPlugin.h" />
+    <ClInclude Include="src\Wire\Plugins\PluginManager.h" />
     <ClInclude Include="src\Wire\Renderer\Buffer.h" />
     <ClInclude Include="src\Wire\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Wire\Renderer\GraphicsContext.h" />
@@ -567,6 +569,7 @@
     <ClCompile Include="src\Wire\Core\Window.cpp" />
     <ClCompile Include="src\Wire\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Wire\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Wire\Plugins\PluginManager.cpp" />
     <ClCompile Include="src\Wire\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Wire\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Wire\Renderer\GraphicsContext.cpp" />

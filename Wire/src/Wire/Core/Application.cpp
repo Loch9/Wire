@@ -70,11 +70,15 @@ namespace Wire {
 			if (e.Handled)
 				break;
 		}
+
+		GetPluginManager().OnEvent(e);
 	}
 
 	void Application::Run()
 	{
 		WR_PROFILE_FUNCTION();
+
+		GetPluginManager().Setup();
 
 		while (m_Running)
 		{
@@ -101,6 +105,8 @@ namespace Wire {
 						layer->OnImGuiRender();
 				}
 				m_ImGuiLayer->End();
+
+				GetPluginManager().OnUpdate(timestep);
 			}
 
 			m_Window->OnUpdate();

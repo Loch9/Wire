@@ -7,6 +7,8 @@
 #include "Wire/Events/Event.h"
 #include "Wire/Events/ApplicationEvent.h"
 
+#include "Wire/Plugins/PluginManager.h"
+
 #include "Timestep.h"
 
 #include "Wire/ImGui/ImGuiLayer.h"
@@ -31,6 +33,7 @@ namespace Wire {
 		void Close();
 
 		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+		PluginManager& GetPluginManager() { return m_PluginManager; }
 
 		inline static Application& Get() { return *s_Instance; }
 	private:
@@ -39,10 +42,15 @@ namespace Wire {
 	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
+
 		bool m_Running = true;
 		bool m_Minimized = false;
+
 		LayerStack m_LayerStack;
+
 		float m_LastFrameTime = 0.0f;
+
+		PluginManager m_PluginManager;
 	private:
 		static Application* s_Instance;
 	};
